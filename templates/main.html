@@ -5,9 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <h1>Assignment - 1</h1>
     <title>Weather Data Fetcher</title>
-   
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 </head>
-  <body>
+<body>
     <h2>Fetch Historical Weather Data</h2>
     <form action="/submit" method="post">
         <div>
@@ -26,6 +35,40 @@
         <br>
         <br>
     </form>
-    </body>
-</html>
+    <form action="/process-all-weather-data" method="get">
+        <button type="submit">Process All Unprocessed Weather Data</button>
+    </form>
 
+    <br>
+    <h2>Processed Weather Data</h2>
+    <table>
+        <tr>
+            <th>City</th>
+            <th>Date</th>
+            <th>Weather Text</th>
+            <th>Max Temp (°C)</th>
+            <th>Min Temp (°C)</th>
+            <th>Chance of rain</th>
+            <th>Chance of daily_chance_of_snow</th>
+            <th>Max wind</th>
+            <th>Precipitation in mm</th>
+            <th>Uv percentage</th>
+           
+        </tr>
+        {% for item in weather_data %}
+            <tr>
+                <td>{{ item.city }}</td>
+                <td>{{ item.date }}</td>
+                <td>{{ item.text }}</td>
+                <td>{{ item.maxtemp_c }}</td>
+                <td>{{ item.mintemp_c }}</td>
+                <td>{{ item.daily_chance_of_rain }}</td>
+                <td>{{ item.daily_chance_of_snow }}</td>
+                <td>{{ item.maxwind_kph }}</td>
+                <td>{{ item.totalprecip_mm }}</td>
+                <td>{{ item.uv}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
